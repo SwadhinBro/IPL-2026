@@ -19,8 +19,6 @@ font-family:'Poppins',sans-serif;
 text-align:center;
 }
 
-/* TITLE */
-
 .title{
 font-size:38px;
 font-weight:700;
@@ -31,13 +29,12 @@ margin-top:15px;
 .subtitle{
 color:#ffd700;
 font-size:14px;
+margin-bottom:10px;
 }
-
-/* PLAYER */
 
 .player-box{
 width:95%;
-margin:15px auto;
+margin:10px auto;
 border:2px solid #00bfff;
 border-radius:14px;
 overflow:hidden;
@@ -56,8 +53,6 @@ height:100%;
 border:none;
 }
 
-/* LANGUAGE */
-
 .lang{
 display:flex;
 justify-content:center;
@@ -75,12 +70,10 @@ font-weight:700;
 cursor:pointer;
 }
 
-/* TELEGRAM */
-
 .telegram{
 display:inline-block;
-margin:15px;
-padding:14px 32px;
+margin:20px;
+padding:15px 35px;
 background:#00bfff;
 color:#000;
 font-weight:700;
@@ -92,60 +85,50 @@ animation:pulse 2s infinite;
 
 @keyframes pulse{
 0%{transform:scale(1);}
-50%{transform:scale(1.05);}
+50%{transform:scale(1.08);}
 100%{transform:scale(1);}
 }
 
-/* SECTION TITLE */
-
-.section{
-font-size:20px;
-margin-top:10px;
-}
-
-/* SCROLL BOX */
-
-.scroll-box{
+#popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.85);
 display:flex;
-overflow-x:auto;
-gap:12px;
-padding:10px;
+justify-content:center;
+align-items:center;
+z-index:999;
 }
 
-/* ESPN CARDS */
-
-.espn-card{
-min-width:320px;
-height:200px;
+.popup-box{
+background:#111;
+padding:25px;
 border-radius:12px;
-overflow:hidden;
-border:1px solid #00bfff;
-}
-
-.espn-card iframe{
-width:100%;
-height:600px;
-border:none;
-margin-top:-200px;
-}
-
-/* POINTS */
-
-.points{
-width:95%;
-margin:20px auto;
-height:420px;
-border-radius:12px;
-overflow:hidden;
+text-align:center;
 border:2px solid #00bfff;
-box-shadow:0 0 15px #00bfff;
+box-shadow:0 0 20px #00bfff;
 }
 
-.points iframe{
-width:100%;
-height:900px;
+.popup-box a{
+display:block;
+margin:10px 0;
+padding:12px;
+background:#00bfff;
+color:#000;
+font-weight:700;
+border-radius:8px;
+text-decoration:none;
+}
+
+.popup-box button{
+padding:10px 20px;
 border:none;
-margin-top:-250px;
+background:#fff;
+color:#000;
+border-radius:8px;
+cursor:pointer;
 }
 
 </style>
@@ -157,69 +140,45 @@ margin-top:-250px;
 <div class="title">IPL 2026</div>
 <div class="subtitle">Join @Cricfylive for Latest Updates</div>
 
-<!-- PLAYER -->
-
 <div class="player-box">
 <div class="player">
 <iframe id="liveFrame" allowfullscreen></iframe>
 </div>
 </div>
 
-<!-- LANGUAGE -->
-
 <div class="lang">
-<button onclick="playVideo(hindi)">Hindi</button>
-<button onclick="playVideo(english)">English</button>
+<button onclick="playVideo('hindi')">Hindi</button>
+<button onclick="playVideo('english')">English</button>
 </div>
-
-<!-- TELEGRAM -->
 
 <a class="telegram" href="https://t.me/CRICFyLive">JOIN TELEGRAM</a>
 
-<!-- SCHEDULE -->
-
-<div class="section">Match Schedule</div>
-
-<div class="scroll-box">
-
-<div class="espn-card">
-<iframe src="https://www.espncricinfo.com/series/ipl-2026-1449924/match-schedule-fixtures-and-results"></iframe>
-</div>
-
-<div class="espn-card">
-<iframe src="https://www.espncricinfo.com/series/ipl-2026-1449924/match-schedule-fixtures-and-results"></iframe>
-</div>
-
-</div>
-
-<!-- POINTS -->
-
-<div class="section">Points Table</div>
-
-<div class="points">
-<iframe src="https://www.espncricinfo.com/series/ipl-2026-1449924/points-table-standings"></iframe>
+<div id="popup">
+  <div class="popup-box">
+    <h2>Join Telegram</h2>
+    <a href="https://t.me/CRICFyLive" target="_blank">JOIN NOW</a>
+    <button onclick="closePopup()">Close</button>
+  </div>
 </div>
 
 <script>
 
-/* 🔥 SIRF YEH CHANGE KAR */
+let hindiLink = "https://extrrav.pages.dev/c3?id=H1";
+let englishLink = "https://extrrav.pages.dev/c3?id=E1";
 
-let hindi = "https://extrrav.pages.dev/c3?id=H1";
-let english = "https://extrrav.pages.dev/c3?id=E1";
-
-/* AUTO EMBED */
-
-function convert(url){
-return url.replace("live/","embed/").split("?")[0];
+function playVideo(type){
+if(type === "hindi"){
+document.getElementById("liveFrame").src = hindiLink;
+}else{
+document.getElementById("liveFrame").src = englishLink;
+}
 }
 
-function playVideo(link){
-document.getElementById("liveFrame").src = convert(link);
+playVideo("hindi");
+
+function closePopup(){
+document.getElementById("popup").style.display="none";
 }
-
-/* DEFAULT */
-
-playVideo(hindi);
 
 </script>
 
